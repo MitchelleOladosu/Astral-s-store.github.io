@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Items</title>
+
+    <link rel="stylesheet" href="styles.css">
+
+
+</head>
+
+<body>
+
+    <table class="responsive-table">
+        <caption>Shopping Items</caption>
+        <thead>
+            <tr>
+                <th scope="col">Item</th>
+                <th scope="col">Image</th>
+                <th scope="col">Price</th>
+                <th scope="col">Availability</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td data-label="Item 1">T-Shirt</td>
+                <td><img class="item-image" src="/images/T-shirt.jpeg" alt="Item 1"></td>
+                <td data-label="Price">₦30000</td>
+                <td data-label="Availability">In Stock</td>
+                <td><button class="place-order-btn">Place Order</button></td>
+            </tr>
+            <tr>
+                <td data-label="Item 2">Jeans</td>
+                <td><img src="/images/Jeans.jpeg" alt="Item 2" class="item-image"></td>
+                <td data-label="Price">₦70000</td>
+                <td data-label="Availability">Out of Stock</td>
+                <td data-label="Action">
+                    <button class="notify-btn">Notify Me</button>
+                    <button class="preorder-btn">Pre-order</button>
+                </td>
+
+            </tr>
+            <tr>
+                <td data-label="Item 3">Sneakers</td>
+                <td><img src="/images/Sneakers.jpeg" alt="Item 3" class="item-image"></td>
+                <td data-label="Price">₦200000</td>
+                <td data-label="Availability">In Stock</td>
+                <td><button class="place-order-btn">Place Order</button></td>
+            </tr>
+            <tr>
+                <td data-label="Item 4">Jacket</td>
+                <td><img src="/images/Jacket.jpeg" alt="Item 4" class="item-image"></td>
+                <td data-label="Price">₦100000</td>
+                <td data-label="Availability">In Stock</td>
+                <td><button class="place-order-btn">Place Order</button></td>
+            </tr>
+            <tr>
+                <td data-label="Item 5">Sandals</td>
+                <td><img src="/images/Sandals.jpeg" alt="Item 5" class="item-image"></td>
+                <td data-label="Price">₦10000</td>
+                <td data-label="Availability">Out of Stock</td>
+                <td data-label="Action">
+                    <button class="notify-btn">Notify Me</button>
+                    <button class="preorder-btn">Pre-order</button>
+                </td>
+
+            </tr>
+            <tr>
+                <td data-label="Item 6">Bikini</td>
+                <td><img src="/images/Bikini.jpeg" alt="Item 6" class="item-image"></td>
+                <td data-label="Price">₦40000</td>
+                <td data-label="Availability">In Stock</td>
+                <td><button class="place-order-btn">Place Order</button></td>
+            </tr>
+            <tr>
+                <td data-label="Item 7">Panty hose</td>
+                <td><img src="/images/Pantyhose.jpeg" alt="Item 7" class="item-image"></td>
+                <td data-label="Price">₦10000</td>
+                <td data-label="Availability">Out of Stock</td>
+                <td data-label="Action">
+                    <button class="notify-btn">Notify Me</button>
+                    <button class="preorder-btn">Pre-order</button>
+                </td>
+
+            </tr>
+            <tr>
+                <td data-label="Item 8">Backpack</td>
+                <td><img src="/images/Backpack.jpeg" alt="Item 8" class="item-image"></td>
+                <td data-label="Price">₦10000</td>
+                <td data-label="Availability">Out of Stock</td>
+                <td data-label="Action">
+                    <button class="notify-btn">Notify Me</button>
+                    <button class="preorder-btn">Pre-order</button>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+
+    <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImg">
+    </div>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById("myModal");
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+        // Get all images with class="item-image"
+        var images = document.getElementsByClassName("item-image");
+        // Get the modal content image
+        var modalImg = document.getElementById("modalImg");
+
+        // Function to open the modal and set image source
+        function openModal(src) {
+            modal.style.display = "block";
+            modalImg.src = src;
+        }
+
+        // Function to close the modal
+        function closeModal() {
+            modal.style.display = "none";
+        }
+
+        // Loop through all images and add onclick event listeners
+        for (var i = 0; i < images.length; i++) {
+            images[i].addEventListener("click", function () {
+                if (modal.style.display === "block" && modalImg.src === this.src) {
+                    closeModal();
+                } else {
+                    openModal(this.src);
+                }
+            });
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            closeModal();
+        }
+
+        // Close the modal when the user clicks anywhere outside of it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Function to handle "Place Order" button click
+        function placeOrder() {
+            alert("Your order has been placed!");
+        }
+
+        // Function to handle "Pre-order" button click
+        function preOrder() {
+            alert("Thank you for your pre-order! We will contact you shortly.");
+        }
+
+        // Function to handle "Notify Me" button click
+        function notifyMe() {
+            alert("You will be notified when this item is back in stock.");
+        }
+
+        // Add event listeners to "Place Order" buttons
+        var placeOrderButtons = document.querySelectorAll('.place-order-btn');
+        placeOrderButtons.forEach(function (button) {
+            button.addEventListener('click', placeOrder);
+        });
+
+        // Add event listeners to "Pre-order" buttons
+        var preOrderButtons = document.querySelectorAll('.preorder-btn');
+        preOrderButtons.forEach(function (button) {
+            button.addEventListener('click', preOrder);
+        });
+
+        // Add event listeners to "Notify Me" buttons
+        var notifyButtons = document.querySelectorAll('.notify-btn');
+        notifyButtons.forEach(function (button) {
+            button.addEventListener('click', notifyMe);
+        });
+
+        fetch('https://your-backend-api.com/items')
+            .then(response => response.json())
+            .then(data => {
+                // Process the retrieved data
+            })
+            .catch(error => console.error('Error fetching data:', error));
+
+        fetch('https://your-backend-api.com/items/123', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ availability: 'In Stock' }),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to update item');
+                }
+                // Handle success
+            })
+            .catch(error => console.error('Error updating item:', error));
+
+
+        const express = require('express');
+        const jwt = require('jsonwebtoken');
+
+        const app = express();
+
+        app.get('/protected', verifyToken, (req, res) => {
+            jwt.verify(req.token, 'your-secret-key', (err, authData) => {
+                if (err) {
+                    res.sendStatus(403);
+                } else {
+                    res.json({ message: 'Protected data', authData });
+                }
+            });
+        });
+
+        function verifyToken(req, res, next) {
+            const bearerHeader = req.headers['authorization'];
+            if (typeof bearerHeader !== 'undefined') {
+                const bearerToken = bearerHeader.split(' ')[1];
+                req.token = bearerToken;
+                next();
+            } else {
+                res.sendStatus(403);
+            }
+        }
+
+        app.listen(3000, () => console.log('Server started on port 3000'));
+
+
+    </script>
+
+</body>
+
+</html>
